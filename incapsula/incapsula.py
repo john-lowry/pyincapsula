@@ -4,7 +4,6 @@ import os
 import requests
 
 api_endpoint='https://my.incapsula.com/api/'
-api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY')
 
 '''
 def addSite

@@ -31,15 +31,15 @@ def modSiteLogLevel
 def modSiteSecurityConfig
 '''
 
-def modSiteACL(site_id, api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY'), rule_id, *urls, *url_patterns, *countries, *continents, *ips):
+def modSiteACL(rule_id, site_id, api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY'), *args):
     if rule_id == 'api.acl.blacklisted_countries':
-        payload={'api_id': api_id,'api_key': api_key, 'site_id': site_id, 'rule_id': rule_id, 'countries': countries}
+        payload={'api_id': api_id,'api_key': api_key, 'site_id': site_id, 'rule_id': rule_id, 'countries': args}
     if rule_id == 'api.acl.blacklisted_urls':
-        payload={'api_id': api_id,'api_key': api_key, 'site_id': site_id, 'rule_id': rule_id, 'urls': urls}
+        payload={'api_id': api_id,'api_key': api_key, 'site_id': site_id, 'rule_id': rule_id, 'urls': args}
     if rule_id == 'api.acl.blacklisted_ips':
-        payload={'api_id': api_id,'api_key': api_key, 'site_id': site_id, 'rule_id': rule_id, 'ips': ips}
+        payload={'api_id': api_id,'api_key': api_key, 'site_id': site_id, 'rule_id': rule_id, 'ips': args}
     if rule_id == 'api.acl.whitelisted_ips':
-        payload={'api_id': api_id,'api_key': api_key, 'site_id': site_id, 'rule_id': rule_id, 'ips': ips}
+        payload={'api_id': api_id,'api_key': api_key, 'site_id': site_id, 'rule_id': rule_id, 'ips': args}
     url=api_endpoint + 'prov/v1/sites/configure/acl'
     r = requests.post(url, data=payload)
     return r.text

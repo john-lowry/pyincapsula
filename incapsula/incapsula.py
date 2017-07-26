@@ -31,7 +31,7 @@ def modSiteLogLevel
 def modSiteSecurityConfig
 '''
 
-def modSiteACL(rule_id, site_id, api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY'), *args):
+def modSiteACL(site_id, rule_id, ips, api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY')):
     if rule_id == 'api.acl.blacklisted_countries':
         payload={'api_id': api_id,'api_key': api_key, 'site_id': site_id, 'rule_id': rule_id, 'countries': args}
     if rule_id == 'api.acl.blacklisted_urls':

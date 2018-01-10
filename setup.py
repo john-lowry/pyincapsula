@@ -4,11 +4,11 @@ from setuptools import setup
 
 setup(
     name='incapsula', 
-    version='0.04.5',
+    version='0.04.6',
     author='John Lowry',
     author_email='johnlowry@gmail.com',
     description='A python module for using the Incapsula API',
-    url='https://github.com/j-lowry/pyincapsula',
+    url='https://github.com/john-lowry/pyincapsula',
     license='GPL v2.0',
     keywords="WAF Incapsula",
     packages=['incapsula',],

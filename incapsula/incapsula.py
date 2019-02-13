@@ -53,21 +53,19 @@ def modSiteLogLevel(site_id, log_level, api_id=os.environ.get('API_ID'), api_key
 # This is only a partial implementation, more still needs to be added
 def modSiteSecurityConfig(site_id,rule_id,value,api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY'), chal_sus_bot='true'):
     url=api_endpoint+'prov/v1/sites/configure/security'
-    if param=='api.threats.ddos':
+    if rule_id=='api.threats.ddos':
         payload={
                 'api_id': api_id,
                 'api_key': api_key,
-                'domain': domain,
                 'site_id':site_id,
                 'rule_id':rule_id,
-                'activation_mode'=api.threats.ddos.activiation_mode.auto, #This is required, can also be on
+                'activation_mode':'api.threats.ddos.activiation_mode.auto', #This is required, can also be on
                 'ddos_traffic_threshold':value
                 }
-    elif param=='api.threats.bot_access_control'
+    elif rule_id=='api.threats.bot_access_control':
         payload={
                 'api_id':api_id,
                 'api_key':api_key,
-                'domain':domain,
                 'site_id':site_id,
                 'rule_id':rule_id,
                 'block_bad_bots':value,

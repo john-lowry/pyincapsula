@@ -14,7 +14,7 @@ import requests
 
 api_endpoint='https://my.incapsula.com/api/'
 
-def modSiteSecurityConfig(site_id,rule_id,value,api_id=os.environ.get('API_ID'),api_key=os.environ.get('API_KEY'),chal_sus_bot='true'):
+def modSiteSecurityConfig(site_id,rule_id,value,chal_sus_bot='true',api_id=os.environ.get('API_ID'),api_key=os.environ.get('API_KEY')):
     url=api_endpoint+'prov/v1/sites/configure/security'
     if rule_id=='api.threats.ddos':
         payload={
@@ -26,6 +26,8 @@ def modSiteSecurityConfig(site_id,rule_id,value,api_id=os.environ.get('API_ID'),
             'ddos_traffic_threshold':value
         }
     elif rule_id=='api.threats.bot_access_control':
+        value=str(value).lower()
+        chal_sus_bot=str(chal_sus_bot).lower()
         payload={
             'api_id':api_id,
             'api_key':api_key,
@@ -39,7 +41,7 @@ def modSiteSecurityConfig(site_id,rule_id,value,api_id=os.environ.get('API_ID'),
         or rule_id=='api.threats.cross_site_scripting'\
         or rule_id=='api.threats.illegal_resource_access'\
         or rule_id=='api.threats.backdoor':
-        value='api.threats.action.'+value
+        value='api.threats.action.'+str(value).lower()
         payload={
             'api_id':api_id,
             'api_key':api_key,

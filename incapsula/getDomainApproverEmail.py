@@ -1,5 +1,8 @@
 #!/usr/bin/python
-  
+
+# Returns emails that can be used to add SSL
+# Requires the domain of the site
+
 import os
 import requests
 

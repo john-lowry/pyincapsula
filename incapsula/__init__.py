@@ -7,3 +7,5 @@ from .modSiteACL import modSiteACL
 from .modSiteLogLevel import modSiteLogLevel
 from .getSubAccounts import getSubAccounts
 from .getSites import getSites
+from .modTLS import modTLS
+from .modCustomCert import modCustomCert

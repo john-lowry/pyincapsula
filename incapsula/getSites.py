@@ -43,6 +43,6 @@ def getSites(account=None,page=0,page_size=100,recursive=False,
                 out_json['sites'].extend(results['sites'])
                 run=False
         else:
-            out_json['sites'].extend(results['sites'])
+            out_json=results
             run=False
     return json.dumps(out_json)

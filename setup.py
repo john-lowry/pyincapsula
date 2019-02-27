@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='incapsula', 
-    version='0.6.1',
+    version='0.6.3',
     author='John Lowry',
     author_email='johnlowry@gmail.com',
     description='A python module for using the Incapsula API',
@@ -22,6 +22,7 @@ setup(
     ],
     install_requires=[
         'requests',
+        'json'
     ],
 )
 

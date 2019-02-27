@@ -21,8 +21,7 @@ setup(
         "Topic :: Security",
     ],
     install_requires=[
-        'requests',
-        'json'
+        'requests'
     ],
 )
 

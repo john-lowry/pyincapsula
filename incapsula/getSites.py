@@ -6,7 +6,7 @@ import json
 api_endpoint = 'https://my.incapsula.com/api/'
 
 # Returns all site assosiated with the provided account
-def getSites(account=None,page=0,page_size=100,recursive=False,
+def getSites(account=None,page=0,page_size=100,recursive=True,
         api_id=os.environ.get('API_ID'),api_key=os.environ.get('API_KEY')):
     # https://docs.incapsula.com/Content/API/sites-api.htm#List
     url = api_endpoint+'prov/v1/sites/list'
@@ -21,7 +21,6 @@ def getSites(account=None,page=0,page_size=100,recursive=False,
             payload.update({'account_id':account})
         if page > 0:
             payload.update({'page_num':page})
-        print(payload)
         r = requests.post(url, data=payload)
         results = json.loads(r.text)
         if recursive:

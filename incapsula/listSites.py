@@ -1,7 +1,7 @@
-#!python3
+#!/usr/bin/env python3
 import os
 import requests
-from com_error import errorProcess
+from .com_error import errorProcess
 
 api_endpoint = 'https://my.incapsula.com/api/'
 

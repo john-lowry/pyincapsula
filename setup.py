@@ -1,10 +1,10 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from setuptools import setup
 
 setup(
     name='incapsula', 
-    version='0.7.0',
+    version='0.7.1',
     author='John Lowry',
     author_email='johnlowry@gmail.com',
     description='A python module for using the Incapsula API',

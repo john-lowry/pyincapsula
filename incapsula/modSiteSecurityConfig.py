@@ -1,4 +1,4 @@
-#!python3
+#!/usr/bin/env python3
 
 # Changes security settings for the spesified site
 # Requires FQDN, the rule id, and, the value to assign
@@ -63,7 +63,7 @@ def modSiteSecurityConfig(site_id=None,rule_id=None,value=None,
         return errorProcess(error)
     try: # Deliver the payload
         r = requests.post(url, data=payload)
-        r.rase_for_status()
+        r.raise_for_status()
         return r.text
     except NameError as error:
         return errorProcess(error,'Rule ID')

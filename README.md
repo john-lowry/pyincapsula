@@ -7,7 +7,6 @@ This is a python module for interacting with the [Incapsula](https://my.incapsul
 Python modules:
 
 - requests
-- json
 
 ## Setup & Authentication
 

@@ -1,8 +1,8 @@
-#!python3
+#!/usr/bin/env python3
 import os
 import requests
 import base64
-from com_error import errorProcess
+from .com_error import errorProcess
 
 api_endpoint = 'https://my.incapsula.com/api/'
 
@@ -15,7 +15,7 @@ def modCustomCert(site_id, certificate, private_key, passphrase=None,
             read = certFile.read()
             cert = base64.b64encode(read)
     except EnvironmentError as error:
-        errorProcess(error,str(certificate)+'Certificate could not be read')
+        return errorProcess(error,str(certificate)+'Certificate could not be read')
     except Exception as error:
         return errorProcess(error)
     try:
@@ -23,7 +23,7 @@ def modCustomCert(site_id, certificate, private_key, passphrase=None,
             read = privFile.read()
             privKey = base64.b64encode(privFile)
     except EnvironmentError as error:
-        errorProcess(error,str(private_key)+'Private Key could not be read')
+        return errorProcess(error,str(private_key)+'Private Key could not be read')
     except Exception as error:
         return errorProcess(error)
     url = api_endpoint + 'prov/v1/customCertificate/upload'

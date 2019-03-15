@@ -10,3 +10,4 @@ from .getSites import getSites
 from .modTLS import modTLS
 from .modCustomCert import modCustomCert
 from .getValidate import getValidation
+from .getReport import getReport

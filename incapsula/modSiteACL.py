@@ -1,4 +1,4 @@
-#!pyton3
+#!/usr/bin/env pyton3
 import os
 import requests
 from .com_error import errorProcess

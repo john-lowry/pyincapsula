@@ -1,4 +1,12 @@
 #!/usr/bin/env python3
+
+"""Returns the JSON status for one site
+
+ site_id -- numerical site id to retrive
+ api_id -- API ID to use (Default: enviroment variable)
+ api_key -- API KEY to use (Default: enviroment variable)
+"""
+
 import os
 import requests
 from .com_error import errorProcess

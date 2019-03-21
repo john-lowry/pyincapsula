@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
 
+"""Processes errors for pyincapsula
+
+Handles all error that might occur with pyincapsula and returns a
+JSON breakdown of what the error is. See github for more information
+byond the description and details the error message returns
+
+ error -- Exception thrown by the script
+ data -- Extra data needed to diagnose the error (Default: None)
+"""
+
 import json
 import requests
 

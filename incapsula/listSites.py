@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+
+"""Depreciated Site listing module, DO NOT USE
+
+ api_id -- API ID to use (Default: enviroment variable)
+ api_key -- API KEY to use (Default: enviroment variable)
+ """
+
 import os
 import requests
 from .com_error import errorProcess

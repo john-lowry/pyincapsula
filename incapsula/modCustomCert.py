@@ -1,4 +1,18 @@
 #!/usr/bin/env python3
+
+"""Uploads a custom certificate for a site
+
+Requires the Site_ID, location of the certificate file, location of the 
+Private Key file, and the passphrase if required
+
+ site_id -- numerical site id to retrive
+ certificate -- file location of the certificate to upload
+ private_key -- file location of the private key for the certificate
+ passphrase -- passphrase for the private key (Default: None)
+ api_id -- API ID to use (Default: enviroment variable)
+ api_key -- API KEY to use (Default: enviroment variable)
+"""
+
 import os
 import requests
 import base64

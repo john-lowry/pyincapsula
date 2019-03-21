@@ -1,4 +1,13 @@
 #!/usr/bin/env python3
+
+"""Modifies a sites logging level
+
+ site_id -- numerical site id to retrive
+ log level -- log level to set
+ api_id -- API ID to use (Default: enviroment variable)
+ api_key -- API KEY to use (Default: enviroment variable)
+"""
+
 import os
 import requests
 from .com_error import errorProcess

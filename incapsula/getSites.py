@@ -1,4 +1,21 @@
 #!/usr/bin/env python3
+
+"""Gathers a list of all sites
+
+Returns all sites by default and itterates throught pagination.
+Does not require any argument be default to return all sites.
+https://docs.incapsula.com/Content/API/sites-api.htm#List
+
+ account -- sub account to list sites for, ignored if None\
+ (Default: None)
+ page -- Page to start listing sites (Default: 0)
+ page_size -- Number of objects per page (Default: 100)
+ recursive -- determine if the function should loop through pagination\
+ (Default: True)
+ api_id -- API ID to use (Default: enviroment variable)
+ api_key -- API KEY to use (Default: enviroment variable)
+"""
+
 import os
 import requests
 import json
@@ -6,11 +23,8 @@ from .com_error import errorProcess
 
 api_endpoint = 'https://my.incapsula.com/api/'
 
-# Returns all sites assosiated with the provided account
-# No arguments are required to call this function
 def getSites(account=None,page=0,page_size=100,recursive=True,
         api_id=os.environ.get('API_ID'),api_key=os.environ.get('API_KEY')):
-    # https://docs.incapsula.com/Content/API/sites-api.htm#List
     url = api_endpoint+'prov/v1/sites/list'
     run=True
     try:

@@ -1,4 +1,14 @@
 #!/usr/bin/env python3
+
+"""Changes the TLS supported by the site
+
+ site_id -- numerical site id to retrive
+ support_all_tls_versions -- boolen to support all versions of TLS\
+ (Default: True)
+ api_id -- API ID to use (Default: enviroment variable)
+ api_key -- API KEY to use (Default: enviroment variable)
+"""
+
 import os
 import requests
 from .com_error import errorProcess

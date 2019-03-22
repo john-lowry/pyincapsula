@@ -1,16 +1,25 @@
 #!/usr/bin/env python3
 
-# Changes security settings for the spesified site
-# Requires FQDN, the rule id, and, the value to assign
-# Values are either a number (DDoS) True/False (Bot Blocking) or the
-# action without the api.threats.action portion, as that is appended
-# 
-# For Bot blocking we assume that we should challange suspected bot
-# unless told otherwise.
-# 
-# Valid values are listed at:
-# https://docs.incapsula.com/Content/API/sites-api.htm#Modify3
-# This is only a partial implementation, more still needs to be added
+"""Changes security settings for the spesified site
+Requires FQDN, the rule id, and, the value to assign
+Values are either a number (DDoS) True/False (Bot Blocking) or the
+action without the api.threats.action portion, as that is appended
+
+For Bot blocking we assume that we should challange suspected bot
+unless told otherwise.
+
+Valid values are listed at:
+https://docs.incapsula.com/Content/API/sites-api.htm#Modify3
+This is only a partial implementation, more still needs to be added
+
+ site_id -- numerical site id to retrive (Default: None)
+ rule_id -- rule to change (Default: None)
+ value -- value to set (Default: None)
+ chal_sus_bot -- challenge suspected bots, only use on\
+ api.theats.bot_access_control (Default: True)
+ api_id -- API ID to use (Default: enviroment variable)
+ api_key -- API KEY to use (Default: enviroment variable)
+"""
 
 import os
 import requests

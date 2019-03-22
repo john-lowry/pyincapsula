@@ -1,4 +1,20 @@
 #!/usr/bin/env python3
+
+"""Gathers a list of all sub accounts
+
+Returns all sub accounts by default and itterates throught pagination.
+Does not require any argument be default to return all sub accounts.
+https://docs.incapsula.com/Content/API/accounts-api.htm#List2
+
+ page -- Page to start listing sub accounts (Default: 0)
+ page_size -- Number of objects per page (Default: 100)
+ recursive -- determine if the function should loop through pagination\
+ (Default: True)
+ account_id -- account id to operate on (Default: None)
+ api_id -- API ID to use (Default: enviroment variable)
+ api_key -- API KEY to use (Default: enviroment variable)
+"""
+
 import os
 import requests
 import json
@@ -6,10 +22,8 @@ from .com_error import errorProcess
 
 api_endpoint = 'https://my.incapsula.com/api/'
 
-# Returns all sub accounts that the api id can see
 def getSubAccounts(page=0,page_size=30,recursive=True,account_id=None,
         api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY')):
-    # https://docs.incapsula.com/Content/API/accounts-api.htm#List2
     url=api_endpoint+'prov/v1/accounts/listSubAccounts'
     run=True
     try:

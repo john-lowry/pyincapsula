@@ -1,4 +1,24 @@
 #!/usr/bin/env python3
+"""Gathers the JSON results for statistics
+
+Further documentation on granularity, time ranges, and statistics that
+can be gathers can be found here:
+https://docs.incapsula.com/Content/API/traffic-api.htm#Getstatistics
+Granularity, Start Time, and End Time must have a value and not be None
+in order to be used.
+
+ site_id -- Numerical ID of the site to gather statistics on
+ time_range -- time range to gather, use custom to specify a start and end
+ stats -- Statistics to gather, Comma seperated list
+ granularity -- milliseconds between intervals, ignored if None (Default: None)
+ start -- milliseconds since 1/1/1970 to start gathering at,\
+ ignored if None (Default: None)
+ end -- milliseconds since 1/1/1970 to stop gathering at,\
+ ignored if None (Default: None)
+ api_id -- API ID to use (Default: enviroment variable)
+ api_key -- API KEY to use (Default: enviroment variable)
+"""
+
 import os
 import requests
 from .com_error import errorProcess

@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
+"""Returns the email(s) that can be used to verify an SSL for a site
 
-# Returns emails that can be used to add SSL
-# Requires the domain of the site
+ domain -- domain to request email info on
+ api_id -- API ID to use (Default: enviroment variable)
+ api_key -- API KEY to use (Default: enviroment variable)
+"""
 
 import os
 import requests
@@ -9,7 +12,7 @@ from .com_error import errorProcess
 
 api_endpoint = 'https://my.incapsula.com/api/'
 
-def getDomainApproverEmail(domain=None,
+def getDomainApproverEmail(domain,
         api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY')):
     url = api_endpoint+'prov/v1/domain/emails'
     try:

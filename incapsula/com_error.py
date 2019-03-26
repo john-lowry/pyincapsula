@@ -26,6 +26,21 @@ def errorProcess(error, data=None):
             'description':'Required argument not provided',
             'details':str(data)+' was not provided or is incorrect'
         }
+    elif type(error) is ValueError:
+        if data == 'int':
+            outError = {
+                'error':5,
+                'description':'A non-integer value was pass when an integer'
+                'was required',
+                'details':error
+            }
+        if data == 'str':
+            outError = {
+                'error':5,
+                'description':'A non-string value was pass when an string'
+                'was required',
+                'details':error
+            }
     elif type(error) is ConnectionError:
         outError = {
             'error':1,

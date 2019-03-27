@@ -27,9 +27,9 @@ from .com_error import errorProcess
 
 api_endpoint = 'https://my.incapsula.com/api/'
 
-def modSiteSecurityConfig(site_id=None,rule_id=None,value=None,
-        chal_sus_bot='true',api_id=os.environ.get('API_ID'),
-        api_key=os.environ.get('API_KEY')):
+def modSiteSecurityConfig(
+        site_id=None, rule_id=None, value=None, chal_sus_bot='true',
+        api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY')):
     url = api_endpoint+'prov/v1/sites/configure/security'
     try: # Setup the payload
         assert site_id is not None

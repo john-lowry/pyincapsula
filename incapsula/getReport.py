@@ -2,7 +2,7 @@
 """Gathers the JSON results for statistics
 
 Further documentation on granularity, time ranges, and statistics that
-can be gathers can be found here:
+can be gathered can be found here:
 https://docs.incapsula.com/Content/API/traffic-api.htm#Getstatistics
 Granularity, Start Time, and End Time must have a value and not be None
 in order to be used.
@@ -26,7 +26,8 @@ from .com_error import errorProcess
 
 api_endpoint = 'https://my.incapsula.com/api/'
 
-def getReport(site_id,time_range,stats,granularity=None,start=None,end=None,
+def getReport(
+        site_id, time_range, stats, granularity=None, start=None, end=None,
         api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY')):
     url = api_endpoint + 'stats/v1'
     payload = {

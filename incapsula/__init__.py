@@ -12,3 +12,4 @@ from .modCustomCert import modCustomCert
 from .getValidate import getValidation
 from .getReport import getReport
 from .getRules import getRules
+from .getVisits import getVisits

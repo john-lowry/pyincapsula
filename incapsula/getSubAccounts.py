@@ -22,7 +22,8 @@ from .com_error import errorProcess
 
 api_endpoint = 'https://my.incapsula.com/api/'
 
-def getSubAccounts(page=0,page_size=30,recursive=True,account_id=None,
+def getSubAccounts(
+        page=0, page_size=30, recursive=True, account_id=None,
         api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY')):
     url=api_endpoint+'prov/v1/accounts/listSubAccounts'
     run=True

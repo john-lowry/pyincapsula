@@ -16,7 +16,8 @@ from .com_error import errorProcess
 api_endpoint = 'https://my.incapsula.com/api/'
 
 # Requires Site_ID and if all versions of TLS should be supported
-def modTLS(site_id, support_all_tls_versions='true',
+def modTLS(
+        site_id, support_all_tls_versions='true',
         api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY')):
     url = api_endpoint+'prov/v1/sites/tls'
     try:

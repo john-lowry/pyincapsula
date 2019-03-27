@@ -12,8 +12,9 @@ from .com_error import errorProcess
 
 api_endpoint = 'https://my.incapsula.com/api/'
 
-def getDomainApproverEmail(domain,
-        api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY')):
+def getDomainApproverEmail(
+        domain, api_id=os.environ.get('API_ID'),
+        api_key=os.environ.get('API_KEY')):
     url = api_endpoint+'prov/v1/domain/emails'
     try:
         assert domain is not None

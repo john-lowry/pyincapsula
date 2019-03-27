@@ -16,8 +16,9 @@ from .com_error import errorProcess
 api_endpoint = 'https://my.incapsula.com/api/'
 
 
-def modSiteACL(site_id, rule_id, listed,
-        api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY')):
+def modSiteACL(
+        site_id, rule_id, listed, api_id=os.environ.get('API_ID'),
+        api_key=os.environ.get('API_KEY')):
     try:
         if rule_id == 'api.acl.blacklisted_countries':
             payload = {

@@ -19,7 +19,8 @@ from .com_error import errorProcess
 
 api_endpoint = 'https://my.incapsula.com/api/'
 
-def getRules(site_id,page=0,page_size=100,include_ad_rules='Yes',
+def getRules(
+        site_id, page=0, page_size=100, include_ad_rules='Yes',
         include_incap_rules='yes', api_id=os.environ.get('API_ID'),
         api_key=os.environ.get('API_KEY')):
     # https://docs.incapsula.com/Content/API/sites-api.htm#List

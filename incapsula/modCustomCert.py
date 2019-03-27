@@ -22,7 +22,8 @@ api_endpoint = 'https://my.incapsula.com/api/'
 
 # Requires the Site_ID, location of the certificate file, location of
 # the Private Key file, and the passphrase if required
-def modCustomCert(site_id, certificate, private_key, passphrase=None,
+def modCustomCert(
+        site_id, certificate, private_key, passphrase=None,
         api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY')):
     try:
         with open(certificate,'rb') as certFile:

@@ -2,7 +2,7 @@
 """Gathers the JSON results for statistics
 
 Further documentation on granularity, time ranges, and statistics that
-can be gathers can be found here:
+can be gathered can be found here:
 https://docs.incapsula.com/Content/API/traffic-api.htm#Getstatistics
 Granularity, Start Time, and End Time must have a value and not be None
 in order to be used.
@@ -26,7 +26,8 @@ from .com_error import errorProcess
 
 api_endpoint = 'https://my.incapsula.com/api/'
 
-def getReport(site_id,time_range,stats,granularity=None,start=None,end=None,
+def getReport(
+        site_id, time_range, stats, granularity=None, start=None, end=None,
         api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY')):
     url = api_endpoint + 'stats/v1'
     payload = {
@@ -36,19 +37,19 @@ def getReport(site_id,time_range,stats,granularity=None,start=None,end=None,
         'time_range':time_range,
         'stats':stats
     }
-    if granularity is not None:
-        if not isinstance(granularity, int):
-            granularity = int(granularity)
-        payload['granularity']=granularity
-    if start is not None:
-        if not isinstance(start, int):
-            start = int(start)
-        payload['start']=start
-    if end is not None:
-        if not isinstance(end, int):
-            end = int(end)
-        payload['end']=end
     try:
+        if granularity is not None:
+            if not isinstance(granularity, int):
+                granularity = int(granularity)
+            payload['granularity']=granularity
+        if start is not None:
+            if not isinstance(start, int):
+                start = int(start)
+            payload['start']=start
+        if end is not None:
+            if not isinstance(end, int):
+                end = int(end)
+            payload['end']=end
         r = requests.post(url, data=payload)
         return r.text
     except ValueError as error:

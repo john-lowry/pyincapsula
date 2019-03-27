@@ -14,8 +14,9 @@ from .com_error import errorProcess
 
 api_endpoint = 'https://my.incapsula.com/api/'
 
-def modSiteLogLevel(site_id, log_level,
-        api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY')):
+def modSiteLogLevel(
+        site_id, log_level, api_id=os.environ.get('API_ID'),
+        api_key=os.environ.get('API_KEY')):
     url = api_endpoint + 'prov/v1/sites/setlog'
     try:
         payload = {

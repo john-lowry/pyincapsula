@@ -13,8 +13,9 @@ from .com_error import errorProcess
 
 api_endpoint = 'https://my.incapsula.com/api/'
 
-def getValidation(site_id,
-        api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY')):
+def getValidation(
+        site_id, api_id=os.environ.get('API_ID'),
+        api_key=os.environ.get('API_KEY')):
     url = api_endpoint + 'prov/v1/sites/status'
     try:
         payload = {

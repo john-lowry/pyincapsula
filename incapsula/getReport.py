@@ -37,19 +37,19 @@ def getReport(
         'time_range':time_range,
         'stats':stats
     }
-    if granularity is not None:
-        if not isinstance(granularity, int):
-            granularity = int(granularity)
-        payload['granularity']=granularity
-    if start is not None:
-        if not isinstance(start, int):
-            start = int(start)
-        payload['start']=start
-    if end is not None:
-        if not isinstance(end, int):
-            end = int(end)
-        payload['end']=end
     try:
+        if granularity is not None:
+            if not isinstance(granularity, int):
+                granularity = int(granularity)
+            payload['granularity']=granularity
+        if start is not None:
+            if not isinstance(start, int):
+                start = int(start)
+            payload['start']=start
+        if end is not None:
+            if not isinstance(end, int):
+                end = int(end)
+            payload['end']=end
         r = requests.post(url, data=payload)
         return r.text
     except ValueError as error:

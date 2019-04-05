@@ -13,4 +13,4 @@ from .getValidate import getValidation
 from .getReport import getReport
 from .getRules import getRules
 from .getVisits import getVisits
-from .modCachingRules import modCachingRules
+from .modCachingRule import modCachingRule

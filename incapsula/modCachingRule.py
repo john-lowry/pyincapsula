@@ -56,7 +56,7 @@ def modCachingRule(
             payload['always_cache_resource_pattern'] = always_cache_resource_pattern
         if always_cache_resource_duration is not None:
             payload['always_cache_resource_duration'] = always_cache_resource_duration
-        if cache_headers['cache_headers'] is not None:
+        if cache_headers is not None:
             payload['cache_headers'] = cache_headers
         if clear_always_cache_rules is not None:
             payload['clear_always_cache_rules'] = clear_always_cache_rules

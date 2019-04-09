@@ -28,7 +28,7 @@ from .com_error import errorProcess
 api_endpoint = 'https://my.incapsula.com/api/'
 
 def modSiteSecurityConfig(
-        site_id=None, rule_id=None, value=None, chal_sus_bot='true',
+        site_id=None, rule_id=None, value=None, chal_sus_bot='true', ddos_mode='auto',
         api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY')):
     url = api_endpoint+'prov/v1/sites/configure/security'
     try: # Setup the payload
@@ -39,7 +39,7 @@ def modSiteSecurityConfig(
                 'api_key':api_key,
                 'site_id':site_id,
                 'rule_id':rule_id,
-                'activation_mode':'api.threats.ddos.activation_mode.auto',
+                'activation_mode':'api.threats.ddos.activation_mode.' + ddos_mode,
                 'ddos_traffic_threshold':value
             }
         elif rule_id == 'api.threats.bot_access_control':

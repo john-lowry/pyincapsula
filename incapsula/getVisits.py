@@ -32,26 +32,25 @@ in order to be used.
  api_key -- API KEY to use (Default: enviroment variable)
 """
 
-import os
-import requests
 import json
 from .com_error import errorProcess
+from .sendRequest import ApiCredentials, ApiUrl, makeRequest
 
-api_endpoint = 'https://my.incapsula.com/api/'
+api_creds = ApiCredentials()
+api_endpoint = ApiUrl.api_endpoint
 
 def getVisits(
         site_id, time_range='last_7_days', granularity=None, start=None,
         end=None, page=0, page_size=100, security=None, country=None, ip=None,
-        visit_id=None, recursive=True, list_live_visits='false',
-        api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY')):
+        visit_id=None, recursive=True, list_live_visits='false'):
     url = api_endpoint + 'visits/v1'
     list_live_visits = str(list_live_visits).lower
     # Miss type? you didn't want it.
     if list_live_visits not in ('true', 'false'):
         list_live_visits = 'false'
     payload = {
-        'api_id':api_id,
-        'api_key':api_key,
+        'api_id': api_creds.api_id,
+        'api_key': api_creds.api_key,
         'site_id':site_id,
         'time_range':time_range,
         'page_num':page,
@@ -84,7 +83,7 @@ def getVisits(
     if visit_id is not None:
         payload['visit_id']=visit_id
     try:
-        r = requests.post(url, data=payload)
+        r = makeRequest(url, payload)
         r_json = json.loads(r.text)
         # ['visits'] will always be returned. Unless an error has
         # occured, in whcich case res will be greater then 0.
@@ -95,7 +94,7 @@ def getVisits(
             # we already have all the data and it's time to move on.
             while len(r_json['visits']) == max_objects:
                 payload['page_num']=payload['page_num']+1
-                r = requests.post(url, data=payload)
+                r = makeRequest(url, payload)
                 r_json = json.loads(r.text)
                 out['visits'].extend(r_json['visits'])
         else:

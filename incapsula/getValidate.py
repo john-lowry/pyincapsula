@@ -7,24 +7,22 @@
  api_key -- API KEY to use (Default: enviroment variable)
  """
  
-import os
-import requests
 from .com_error import errorProcess
+from .sendRequest import ApiCredentials, ApiUrl, makeRequest
 
-api_endpoint = 'https://my.incapsula.com/api/'
+api_creds = ApiCredentials()
+api_endpoint = ApiUrl.api_endpoint
 
-def getValidation(
-        site_id, api_id=os.environ.get('API_ID'),
-        api_key=os.environ.get('API_KEY')):
+def getValidation(site_id):
     url = api_endpoint + 'prov/v1/sites/status'
     try:
         payload = {
-            'api_id':api_id,
-            'api_key':api_key,
+            'api_id': api_creds.api_id,
+            'api_key': api_creds.api_key,
             'site_id':site_id,
             'tests':'domain_validation'
         }
-        r = requests.post(url, data=payload)
+        r = makeRequest(url, payload)
         return r.text
     except Exception as error:
         return errorProcess(error)

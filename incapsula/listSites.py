@@ -6,22 +6,21 @@
  api_key -- API KEY to use (Default: enviroment variable)
  """
 
-import os
-import requests
 from .com_error import errorProcess
+from .sendRequest import ApiCredentials, ApiUrl, makeRequest
 
-api_endpoint = 'https://my.incapsula.com/api/'
+api_creds = ApiCredentials()
+api_endpoint = ApiUrl.api_endpoint
 
-def listSites(
-        api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY')):
+def listSites():
     url = api_endpoint + 'prov/v1/sites/list'
     try:
         payload = {
-            'api_id':api_id,
-            'api_key':api_key,
-            'page_size':100
+            'api_id': api_creds.api_id,
+            'api_key': api_creds.api_key,
+            'page_size': 100
         }
-        r = requests.post(url, data=payload)
+        r = makeRequest(url, payload)
         return r.text
     except Exception as error:
         return errorProcess(error)

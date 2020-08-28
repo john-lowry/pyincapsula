@@ -20,22 +20,20 @@ in order to be used.
  api_key -- API KEY to use (Default: enviroment variable)
 """
 
-import os
-import requests
 from .com_error import errorProcess
+from .sendRequest import ApiCredentials, ApiUrl, makeRequest
 
-api_endpoint = 'https://my.incapsula.com/api/'
+api_creds = ApiCredentials()
+api_endpoint = ApiUrl.api_endpoint
 
-def getReport(
-        site_id, time_range, stats, granularity=None, start=None, end=None,
-        api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY')):
+def getReport(site_id, time_range, stats, granularity=None, start=None, end=None):
     url = api_endpoint + 'stats/v1'
     payload = {
-        'api_id':api_id,
-        'api_key':api_key,
-        'site_id':site_id,
-        'time_range':time_range,
-        'stats':stats
+        'api_id': api_creds.api_id,
+        'api_key': api_creds.api_key,
+        'site_id': site_id,
+        'time_range': time_range,
+        'stats': stats
     }
     try:
         if granularity is not None:
@@ -50,7 +48,7 @@ def getReport(
             if not isinstance(end, int):
                 end = int(end)
             payload['end']=end
-        r = requests.post(url, data=payload)
+        r = makeRequest(url, payload)
         return r.text
     except ValueError as error:
         return errorProcess(error,'int')

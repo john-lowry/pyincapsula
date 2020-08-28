@@ -21,24 +21,22 @@ This is only a partial implementation, more still needs to be added
  api_key -- API KEY to use (Default: enviroment variable)
 """
 
-import os
-import requests
 from .com_error import errorProcess
+from .sendRequest import ApiCredentials, ApiUrl, makeRequest
 
-api_endpoint = 'https://my.incapsula.com/api/'
+api_creds = ApiCredentials()
+api_endpoint = ApiUrl.api_endpoint
 
-def modSiteSecurityConfig(
-        site_id=None, rule_id=None, value=None, chal_sus_bot='true', ddos_mode='auto',
-        api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY')):
+def modSiteSecurityConfig(site_id=None, rule_id=None, value=None, chal_sus_bot='true', ddos_mode='auto'):
     url = api_endpoint+'prov/v1/sites/configure/security'
     try: # Setup the payload
         assert site_id is not None
         if rule_id == 'api.threats.ddos':
             payload = {
-                'api_id':api_id,
-                'api_key':api_key,
-                'site_id':site_id,
-                'rule_id':rule_id,
+                'api_id': api_creds.api_id,
+                'api_key': api_creds.api_key,
+                'site_id': site_id,
+                'rule_id': rule_id,
                 'activation_mode':'api.threats.ddos.activation_mode.' + ddos_mode,
                 'ddos_traffic_threshold':value
             }
@@ -46,11 +44,11 @@ def modSiteSecurityConfig(
             value = str(value).lower()
             chal_sus_bot = str(chal_sus_bot).lower()
             payload = {
-                'api_id':api_id,
-                'api_key':api_key,
-                'site_id':site_id,
-                'rule_id':rule_id,
-                'block_bad_bots':value,
+                'api_id': api_creds.api_id,
+                'api_key': api_creds.api_key,
+                'site_id': site_id,
+                'rule_id': rule_id,
+                'block_bad_bots': value,
                 'challenge_suspected_bots':chal_sus_bot
             }
         elif rule_id == 'api.threats.remote_file_inclusion'\
@@ -60,10 +58,10 @@ def modSiteSecurityConfig(
             or rule_id == 'api.threats.backdoor':
             value = 'api.threats.action.' + str(value).lower()
             payload = {
-                'api_id':api_id,
-                'api_key':api_key,
-                'site_id':site_id,
-                'rule_id':rule_id,
+                'api_id': api_creds.api_id,
+                'api_key': api_creds.api_key,
+                'site_id': site_id,
+                'rule_id': rule_id,
                 'security_rule_action':value
             }
     except AssertionError as error:
@@ -71,7 +69,7 @@ def modSiteSecurityConfig(
     except Exception as error:
         return errorProcess(error)
     try: # Deliver the payload
-        r = requests.post(url, data=payload)
+        r = makeRequest(url, payload)
         r.raise_for_status()
         return r.text
     except NameError as error:

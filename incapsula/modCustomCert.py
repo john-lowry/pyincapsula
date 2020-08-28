@@ -13,18 +13,16 @@ Private Key file, and the passphrase if required
  api_key -- API KEY to use (Default: enviroment variable)
 """
 
-import os
-import requests
 import base64
 from .com_error import errorProcess
+from .sendRequest import ApiCredentials, ApiUrl, makeRequest
 
-api_endpoint = 'https://my.incapsula.com/api/'
+api_creds = ApiCredentials()
+api_endpoint = ApiUrl.api_endpoint
 
 # Requires the Site_ID, location of the certificate file, location of
 # the Private Key file, and the passphrase if required
-def modCustomCert(
-        site_id, certificate, private_key, passphrase=None,
-        api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY')):
+def modCustomCert(site_id, certificate, private_key, passphrase=None):
     try:
         with open(certificate,'rb') as certFile:
             read = certFile.read()
@@ -45,22 +43,22 @@ def modCustomCert(
     try:
         if(passphrase is not None):
             payload = {
-                'api_id':api_id,
-                'api_key':api_key,
-                'site_id':site_id,
-                'certificate':cert,
-                'private_key':privKey,
-                'passphrase':passphrase
+                'api_id': api_creds.api_id,
+                'api_key': api_creds.api_key,
+                'site_id': site_id,
+                'certificate': cert,
+                'private_key': privKey,
+                'passphrase': passphrase
             }
         else:
             payload = {
-                'api_id':api_id,
-                'api_key':api_key,
-                'site_id':site_id,
-                'certificate':cert,
-                'private_key':privKey
+                'api_id': api_creds.api_id,
+                'api_key': api_creds.api_key,
+                'site_id': site_id,
+                'certificate': cert,
+                'private_key': privKey
             }
-        r = requests.post(url, data=payload)
+        r = makeRequest(url, payload)
         return r.text
     except Exception as error:
         return errorProcess(error)

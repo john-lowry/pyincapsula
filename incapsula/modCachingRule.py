@@ -24,16 +24,14 @@ All options below are optional:
  clear_cache_headers_rules -- An optional boolean parameter. If set to "true", the site's cache header rules will be cleared.
 """
 
-import os
-import requests
 from .com_error import errorProcess
+from .sendRequest import ApiCredentials, ApiUrl, makeRequest
 
-api_endpoint = 'https://my.incapsula.com/api/'
-
+api_creds = ApiCredentials()
+api_endpoint = ApiUrl.api_endpoint
 
 def modCachingRule(
-        site_id=None, api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY'),
-        never_cache_resource_pattern=None, never_cache_resource_url=None, always_cache_resource_url=None,
+        site_id=None, never_cache_resource_pattern=None, never_cache_resource_url=None, always_cache_resource_url=None,
         always_cache_resource_pattern=None, always_cache_resource_duration=None, cache_headers=None,
         clear_always_cache_rules=None, clear_never_cache_rules=None, clear_cache_headers_rules=None):
 
@@ -41,8 +39,8 @@ def modCachingRule(
     try:  # Setup the payload
         assert site_id is not None
         payload = {
-            'api_id': api_id,
-            'api_key': api_key,
+            'api_id': api_creds.api_id,
+            'api_key': api_creds.api_key,
             'site_id': site_id
         }
 
@@ -70,7 +68,7 @@ def modCachingRule(
     except Exception as error:
         return errorProcess(error)
     try:  # Deliver the payload
-        r = requests.post(url, data=payload)
+        r = makeRequest(url, payload)
         r.raise_for_status()
         return r.text
     except NameError as error:

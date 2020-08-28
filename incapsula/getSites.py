@@ -16,27 +16,25 @@ https://docs.incapsula.com/Content/API/sites-api.htm#List
  api_key -- API KEY to use (Default: enviroment variable)
 """
 
-import os
-import requests
 import json
 from .com_error import errorProcess
+from .sendRequest import ApiCredentials, ApiUrl, makeRequest
 
-api_endpoint = 'https://my.incapsula.com/api/'
+api_creds = ApiCredentials()
+api_endpoint = ApiUrl.api_endpoint
 
-def getSites(
-        account=None, page=0, page_size=100, recursive=True,
-        api_id=os.environ.get('API_ID'), api_key=os.environ.get('API_KEY')):
+def getSites (account=None, page=0, page_size=100, recursive=True):
     url = api_endpoint+'prov/v1/sites/list'
     payload = {
-        'api_id':api_id,
-        'api_key':api_key,
-        'page_size':page_size,
-        'page_num':page
+        'api_id': api_creds.api_id,
+        'api_key': api_creds.api_key,
+        'page_size': page_size,
+        'page_num': page
     }
     if account is not None:
         payload['account_id']=account
     try: 
-        r = requests.post(url, data=payload)
+        r = makeRequest(url, payload)
         results = json.loads(r.text)
         if recursive and results['res'] == 0:
             max_objects=page_size
@@ -45,7 +43,7 @@ def getSites(
             # we already have all the data and it's time to move on.
             while len(results['sites']) == max_objects:
                 payload['page_num']=payload['page_num']+1
-                r = requests.post(url, data=payload)
+                r = makeRequest(url, payload)
                 results = json.loads(r.text)
                 out_json['sites'].extend(results['sites'])
         else:

@@ -16,3 +16,5 @@ from .getVisits import getVisits
 from .modCachingRule import modCachingRule
 from .modCacheLevel import modCacheLevel
 from .redirectHTTP import redirectHTTP
+from .getCacheMode import getCacheMode
+from .getAdvancedCachingOptions import getAdvancedCachingOptions
